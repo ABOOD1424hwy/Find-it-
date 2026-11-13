@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f5c4d">
+<title>Find It | مفقودات كلية العلوم والتكنولوجيا – جامعة مروي</title>
+<meta name="description" content="Find It: منصة للبحث عن المفقودات والإبلاغ عن الموجودات داخل كلية العلوم والتكنولوجيا – جامعة مروي">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Aref+Ruqaa:wght@700&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7f5;--card:#fff;--ink:#14231f;--mut:#5d6f69;--pri:#0f5c4d;--pri2:#16846f;--acc:#e3a82b;--lost:#d64545;--found:#1f9d6b;--line:#e1e9e5;--sh:0 8px 30px rgba(15,92,77,.12);--r:18px}
+:root[data-theme=dark]{--bg:#0c1512;--card:#13211d;--ink:#e8f1ee;--mut:#93a8a1;--line:#223630;--sh:0 8px 30px rgba(0,0,0,.4)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding-bottom:84px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0}
+.wrap{max-width:1100px;margin:auto;padding:0 16px}
+/* header */
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.3rem;color:var(--pri)}
+.logo i{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--pri),var(--pri2));display:grid;place-items:center;font-style:normal;color:#fff;font-size:1.2rem}
+.logo small{display:block;font-size:.65rem;color:var(--mut);font-weight:600;margin-top:-6px}
+.hbtns{display:flex;gap:8px;align-items:center}
+.ib{width:40px;height:40px;border-radius:12px;background:var(--bg);border:1px solid var(--line);font-size:1.1rem}
+.btn{padding:11px 20px;border-radius:14px;font-weight:700;background:var(--pri);color:#fff;transition:.2s}
+.btn:hover{background:var(--pri2);transform:translateY(-1px)}
+.btn.sec{background:transparent;color:var(--pri);border:1.5px solid var(--pri)}
+.btn.gold{background:var(--acc);color:#2a1f00}
+.btn.red{background:var(--lost)}
+.btn.sm{padding:7px 14px;font-size:.85rem;border-radius:11px}
+.btn.full{width:100%}
+/* hero */
+.hero{position:relative;min-height:520px;border-radius:0 0 34px 34px;overflow:hidden;color:#fff;display:grid;place-items:center;text-align:center}
+.slides,.slides div{position:absolute;inset:0}
+.slides div{background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s;transform:scale(1.05)}
+.slides div.on{opacity:1;animation:zoom 9s linear forwards}
+@keyframes zoom{to{transform:scale(1.15)}}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,40,33,.55),rgba(6,40,33,.88));z-index:1}
+.hero .in{position:relative;z-index:2;padding:48px 20px;max-width:760px}
+.chip{display:inline-block;padding:6px 16px;border-radius:99px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);font-size:.85rem;backdrop-filter:blur(6px)}
+.hero h1{font-family:'Reem Kufi','Cairo';font-size:clamp(2.6rem,9vw,4.6rem);line-height:1.1;margin:14px 0 6px;letter-spacing:1px}
+.hero h1 b{color:var(--acc)}
+.hero p{font-size:1.08rem;opacity:.95;margin:10px auto 22px;max-width:620px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero .btn.sec{color:#fff;border-color:#fff}
+.designer{margin-top:28px;font-size:.85rem;opacity:.85}
+.designer span{display:block;font-family:'Aref Ruqaa',serif;font-size:1.9rem;color:var(--acc);text-shadow:0 2px 12px rgba(0,0,0,.5);opacity:1;margin-top:2px}
+.designer span::before,.designer span::after{content:"✦";font-size:.9rem;margin:0 10px;color:#fff;vertical-align:middle}
+/* sections */
+section.v{display:none;padding:26px 0;animation:fade .35s}
+section.v.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+h2{font-size:1.4rem;margin-bottom:14px;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-34px;position:relative;z-index:3}
+.stat{background:var(--card);border-radius:var(--r);padding:16px;text-align:center;box-shadow:var(--sh);border:1px solid var(--line)}
+.stat b{display:block;font-size:1.8rem;color:var(--pri)}
+.stat span{font-size:.82rem;color:var(--mut)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0}
+.big{border-radius:var(--r);padding:24px;color:#fff;box-shadow:var(--sh);cursor:pointer;transition:.25s;text-align:right;width:100%}
+.big:hover{transform:translateY(-4px)}
+.big .e{font-size:2.4rem}.big h3{font-size:1.2rem}.big p{font-size:.88rem;opacity:.92}
+.big.l{background:linear-gradient(135deg,#d64545,#a82f4a)}.big.f{background:linear-gradient(135deg,#16846f,#0f5c4d)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.step i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--acc);color:#2a1f00;font-weight:800;margin-bottom:8px}
+.step p{color:var(--mut);font-size:.88rem}
+/* filters & cards */
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+input,select,textarea{width:100%;padding:12px 14px;border-radius:13px;border:1.5px solid var(--line);background:var(--card);outline:0;transition:.2s}
+input:focus,select:focus,textarea:focus{border-color:var(--pri2);box-shadow:0 0 0 3px rgba(22,132,111,.18)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:.25s;position:relative}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh)}
+.card .im{height:150px;background:var(--bg) center/cover;display:grid;place-items:center;font-size:3rem}
+.card .bd{padding:12px 14px}
+.card h4{font-size:1rem}
+.card .m{font-size:.8rem;color:var(--mut);display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.tag{position:absolute;top:10px;right:10px;padding:3px 12px;border-radius:99px;font-size:.75rem;font-weight:700;color:#fff}
+.tag.lost{background:var(--lost)}.tag.found{background:var(--found)}
+.done{position:absolute;top:10px;left:10px;background:#333;color:#fff;font-size:.72rem;padding:3px 10px;border-radius:99px}
+.empty{text-align:center;padding:50px 10px;color:var(--mut)}
+/* form */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--sh)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.seg button{padding:12px;border-radius:13px;background:var(--bg);border:1.5px solid var(--line);font-weight:700}
+.seg button.on.lost{background:var(--lost);color:#fff;border-color:var(--lost)}
+.seg button.on.found{background:var(--found);color:#fff;border-color:var(--found)}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fg .w{grid-column:1/-1}
+label{font-size:.85rem;font-weight:700;display:block;margin:4px 0}
+.up{border:2px dashed var(--line);border-radius:14px;padding:14px;text-align:center;color:var(--mut);cursor:pointer}
+.up img{max-height:160px;border-radius:10px}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(5,20,16,.6);backdrop-filter:blur(5px);z-index:50;display:none;align-items:center;justify-content:center;padding:14px}
+.ov.on{display:flex}
+.md{background:var(--card);border-radius:24px;width:100%;max-width:480px;max-height:92vh;overflow:auto;padding:22px;animation:fade .3s}
+.md.wide{max-width:560px}
+.md .pic{height:220px;border-radius:16px;background:var(--bg) center/cover;margin-bottom:12px;display:grid;place-items:center;font-size:4rem}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tabs{display:flex;background:var(--bg);border-radius:14px;padding:4px;margin-bottom:14px}
+.tabs button{flex:1;padding:10px;border-radius:11px;background:transparent;font-weight:700;color:var(--mut)}
+.tabs button.on{background:var(--pri);color:#fff}
+.field{margin-bottom:10px}
+.bio{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;padding:13px;border-radius:14px;background:var(--bg);border:1.5px dashed var(--pri);color:var(--pri);font-weight:700;width:100%}
+.lock{text-align:center}.lock .fp{font-size:4.5rem;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{transform:scale(1.1);opacity:.7}}
+.match{background:rgba(227,168,43,.14);border:1px solid var(--acc);border-radius:14px;padding:10px 12px;margin-top:12px;font-size:.88rem}
+.match a{color:var(--pri);font-weight:700;cursor:pointer;display:block}
+/* bottom nav */
+nav{position:fixed;bottom:0;inset-inline:0;z-index:30;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0))}
+nav button{background:none;display:flex;flex-direction:column;align-items:center;font-size:.72rem;color:var(--mut);padding:4px 10px;border-radius:12px;font-weight:600}
+nav button span{font-size:1.35rem}
+nav button.on{color:var(--pri)}
+nav button.plus span{background:var(--acc);color:#2a1f00;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;margin-top:-22px;box-shadow:var(--sh)}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 22px;border-radius:99px;z-index:99;font-weight:600;opacity:0;transition:.3s;pointer-events:none;max-width:90%}
+.toast.on{opacity:1}
+footer{text-align:center;color:var(--mut);font-size:.82rem;padding:24px 16px}
+footer b{font-family:'Aref Ruqaa',serif;font-size:1.25rem;color:var(--pri)}
+.note{background:rgba(227,168,43,.15);border-radius:12px;padding:8px 12px;font-size:.8rem;margin-bottom:12px}
+@media(max-width:700px){.two,.fg,.filters{grid-template-columns:1fr}.hero{min-height:480px}.stats{margin-top:-28px}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap bar">
+  <div class="logo"><i>🔎</i><div>Find It<small>كلية العلوم والتكنولوجيا</small></div></div>
+  <div class="hbtns">
+    <button class="ib" id="themeBtn" title="الوضع الليلي">🌙</button>
+    <button class="btn sm" id="authBtn">دخول</button>
+  </div>
+</div></header>
+
+<div class="hero">
+  <div class="slides"><div class="on" style="background-image:url(images/campus1.jpg)"></div><div style="background-image:url(images/campus2.jpg)"></div></div>
+  <div class="in">
+    <span class="chip">🎓 جامعة مروي · كلية العلوم والتكنولوجيا</span>
+    <h1>Find <b>It</b></h1>
+    <p id="welcome">أهلاً بك في منصتك الذكية للمفقودات. فقدت شيئاً؟ ابحث عنه هنا. وجدت شيئاً؟ كن سبب سعادة صاحبه. معاً نجعل كليتنا مكاناً أكثر أماناً وتعاوناً.</p>
+    <div class="cta">
+      <button class="btn gold" onclick="startPost('lost')">🔍 أبحث عن شيء</button>
+      <button class="btn sec" onclick="startPost('found')">🤝 وجدت شيئاً</button>
+    </div>
+    <div class="designer">تصميم وتطوير<span>عبد الرحمن فرح</span></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <!-- HOME -->
+  <section class="v on" id="v-home">
+    <div class="stats"><div class="stat"><b id="s1">0</b><span>إعلان نشط</span></div><div class="stat"><b id="s2">0</b><span>تم إرجاعه ✔</span></div><div class="stat"><b id="s3">0</b><span>مستخدم</span></div></div>
+    <div class="two">
+      <button class="big l" onclick="startPost('lost')"><div class="e">😟</div><h3>أنا أبحث عن شيء مفقود</h3><p>سجّل بيانات مفقودك وسنعرض لك أي موجودات مشابهة.</p></button>
+      <button class="big f" onclick="startPost('found')"><div class="e">😊</div><h3>لقد عثرت على شيء</h3><p>انشر صورة وتفاصيل ما وجدته ليصل لصاحبه بسرعة.</p></button>
+    </div>
+    <h2>كيف يعمل؟</h2>
+    <div class="steps">
+      <div class="step"><i>1</i><b>سجّل حسابك</b><p>مرة واحدة فقط، ثم ادخل بالبصمة.</p></div>
+      <div class="step"><i>2</i><b>انشر إعلاناً</b><p>مفقود أو موجود مع الصورة والمكان.</p></div>
+      <div class="step"><i>3</i><b>تواصل</b><p>اتصال أو واتساب مباشر مع صاحب الإعلان.</p></div>
+      <div class="step"><i>4</i><b>تم التسليم</b><p>أغلق الإعلان بعد استلام الغرض.</p></div>
+    </div>
+    <h2 style="margin-top:26px">أحدث الإعلانات</h2>
+    <div class="grid" id="latest"></div>
+  </section>
+
+  <!-- SEARCH -->
+  <section class="v" id="v-search">
+    <h2>🔍 البحث في المفقودات والموجودات</h2>
+    <div class="filters">
+      <input id="q" placeholder="ابحث: محفظة، مفتاح، هاتف…">
+      <select id="fType"><option value="">الكل</option><option value="lost">مفقود</option><option value="found">موجود</option></select>
+      <select id="fCat"></select>
+      <select id="fPlace"></select>
+    </div>
+    <div class="grid" id="results"></div>
+  </section>
+
+  <!-- POST -->
+  <section class="v" id="v-post">
+    <h2>➕ إضافة إعلان</h2>
+    <div class="panel">
+      <div class="seg"><button class="lost" data-t="lost">😟 فقدت شيئاً</button><button class="found" data-t="found">😊 وجدت شيئاً</button></div>
+      <div class="fg">
+        <div class="w"><label>اسم الغرض *</label><input id="pTitle" maxlength="60" placeholder="مثال: محفظة جلدية سوداء"></div>
+        <div><label>التصنيف *</label><select id="pCat"></select></div>
+        <div><label>المكان داخل الكلية *</label><select id="pPlace"></select></div>
+        <div><label>التاريخ *</label><input type="date" id="pDate"></div>
+        <div><label>رقم التواصل (واتساب) *</label><input type="tel" id="pPhone" placeholder="09xxxxxxxx" inputmode="tel"></div>
+        <div class="w"><label>الوصف (لون، علامات مميزة…)</label><textarea id="pDesc" rows="3" maxlength="400"></textarea></div>
+        <div class="w"><label>صورة (اختياري)</label>
+          <div class="up" id="upBox">📷 اضغط لالتقاط أو اختيار صورة</div><input type="file" id="pImg" accept="image/*" hidden></div>
+      </div>
+      <button class="btn full" id="pSend" style="margin-top:16px">نشر الإعلان</button>
+    </div>
+  </section>
+
+  <!-- MINE -->
+  <section class="v" id="v-mine">
+    <h2>📂 إعلاناتي</h2>
+    <div class="grid" id="mine"></div>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="v" id="v-me">
+    <h2>👤 حسابي</h2>
+    <div class="panel" id="profile"></div>
+  </section>
+</main>
+
+<footer>© 2026 Find It — كلية العلوم والتكنولوجيا · جامعة مروي<br>تصميم <b>عبد الرحمن فرح</b><br><small>سيتم توسيع المنصة لاحقاً لتشمل كليات الجامعة 🚀</small></footer>
+
+<nav>
+  <button data-v="home" class="on"><span>🏠</span>الرئيسية</button>
+  <button data-v="search"><span>🔍</span>بحث</button>
+  <button data-v="post" class="plus"><span>＋</span>إضافة</button>
+  <button data-v="mine"><span>📂</span>إعلاناتي</button>
+  <button data-v="me"><span>👤</span>حسابي</button>
+</nav>
+
+<div class="ov" id="ovAuth"><div class="md" id="authBox"></div></div>
+<div class="ov" id="ovItem"><div class="md wide" id="itemBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   ⚙️ الإعدادات — للربط بالإنترنت (قاعدة بيانات مشتركة بين الجميع)
+   الصق إعدادات Firebase هنا. إن تُركت null يعمل الموقع بوضع تجريبي محلي.
+   ============================================================ */
+const FIREBASE_CONFIG = null;
+/* مثال:
+const FIREBASE_CONFIG = {
+  apiKey:"...", authDomain:"xxx.firebaseapp.com", projectId:"xxx",
+  storageBucket:"xxx.appspot.com", messagingSenderId:"...", appId:"..."
+};*/
+
+const CATS=["📱 هواتف وإلكترونيات","👛 محافظ ومال","🔑 مفاتيح","🪪 وثائق وبطاقات","🎒 حقائب","👕 ملابس","📚 كتب ومذكرات","👓 نظارات وإكسسوارات","💧 أدوات شخصية","❓ أخرى"];
+const PLACES=["المكتبة","قاعات المحاضرات","المعامل","الكافتريا","الساحة الخارجية","المسجد","البوابة الرئيسية","دورات المياه","مواقف السيارات","الإدارة وشؤون الطلاب","أخرى"];
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const LS={get:(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v)),del:k=>localStorage.removeItem(k)};
+let toastT;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("on"),2800)}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+const ago=t=>{const d=(Date.now()-t)/6e4;return d<60?`قبل ${Math.max(1,~~d)} د`:d<1440?`قبل ${~~(d/60)} س`:`قبل ${~~(d/1440)} يوم`};
+
+/* ---------- طبقة البيانات: Firebase أو محلي ---------- */
+let fb=null, DB, AUTH, state={user:null,items:[],users:0,fbMode:false};
+function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+
+const LocalDB={
+  async list(){return LS.get("fi_items",[]).sort((a,b)=>b.createdAt-a.createdAt)},
+  async add(it){const a=LS.get("fi_items",[]);a.push(it);LS.set("fi_items",a)},
+  async update(id,p){const a=LS.get("fi_items",[]);const i=a.findIndex(x=>x.id===id);if(i>-1)Object.assign(a[i],p);LS.set("fi_items",a)},
+  async remove(id){LS.set("fi_items",LS.get("fi_items",[]).filter(x=>x.id!==id))},
+  async usersCount(){return LS.get("fi_users",[]).length}
+};
+const LocalAuth={
+  async signup(name,email,phone,pass){const u=LS.get("fi_users",[]);if(u.some(x=>x.email===email))throw Error("البريد مسجل مسبقاً");
+    const n={uid:uid(),name,email,phone,h:await sha(pass)};u.push(n);LS.set("fi_users",u);LS.set("fi_session",n.uid);return pub(n)},
+  async login(email,pass){const n=LS.get("fi_users",[]).find(x=>x.email===email&&x.h===sha_cache);if(!n)throw Error("بيانات الدخول غير صحيحة");LS.set("fi_session",n.uid);return pub(n)},
+  restore(){const n=LS.get("fi_users",[]).find(x=>x.uid===LS.get("fi_session"));return n?pub(n):null},
+  async logout(full){if(full)LS.del("fi_session")}
+};
+let sha_cache="";const pub=n=>({uid:n.uid,name:n.name,email:n.email,phone:n.phone});
+
+function FbDB(){const c=fb.firestore().collection("items");return{
+  async list(){const s=await c.orderBy("createdAt","desc").limit(300).get();return s.docs.map(d=>d.data())},
+  async add(it){await c.doc(it.id).set(it)},
+  async update(id,p){await c.doc(id).update(p)},
+  async remove(id){await c.doc(id).delete()},
+  async usersCount(){try{const s=await fb.firestore().collection("users").get();return s.size}catch{return 0}}}}
+function FbAuth(){const a=fb.auth(),U=fb.firestore().collection("users");return{
+  async signup(name,email,phone,pass){const r=await a.createUserWithEmailAndPassword(email,pass);const u={uid:r.user.uid,name,email,phone};await U.doc(u.uid).set(u);return u},
+  async login(email,pass){const r=await a.signInWithEmailAndPassword(email,pass);const d=await U.doc(r.user.uid).get();return d.exists?d.data():{uid:r.user.uid,name:email.split("@")[0],email,phone:""}},
+  async restore(){return new Promise(res=>{const off=a.onAuthStateChanged(async u=>{off();if(!u)return res(null);const d=await U.doc(u.uid).get();res(d.exists?d.data():{uid:u.uid,name:u.email.split("@")[0],email:u.email,phone:""})})})},
+  async logout(full){if(full)await a.signOut()}}}
+
+async function initBackend(){
+  if(FIREBASE_CONFIG){
+    try{const v="10.12.2",b=`https://www.gstatic.com/firebasejs/${v}/firebase-`;
+      for(const m of["app","auth","firestore"])await loadScript(`${b}${m}-compat.js`);
+      fb=firebase;fb.initializeApp(FIREBASE_CONFIG);DB=FbDB();AUTH=FbAuth();state.fbMode=true;return}
+    catch(e){console.error(e);toast("تعذر الاتصال بـ Firebase، تم التحويل للوضع المحلي")}}
+  DB=LocalDB;AUTH=LocalAuth;
+}
+
+/* ---------- البصمة (WebAuthn) ---------- */
+const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b)));const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const bioOK=async()=>!!(window.PublicKeyCredential&&await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().catch(()=>false));
+async function bioEnroll(u){
+  try{const cred=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:"Find It"},user:{id:new TextEncoder().encode(u.uid),name:u.email,displayName:u.name},
+    pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required"},timeout:60000}});
+    LS.set("fi_bio",{uid:u.uid,name:u.name,id:b64(cred.rawId)});toast("✅ تم تفعيل الدخول بالبصمة");return true}
+  catch{toast("لم يتم تفعيل البصمة");return false}}
+async function bioVerify(){const b=LS.get("fi_bio");if(!b)return false;
+  try{await navigator.credentials.get({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),allowCredentials:[{type:"public-key",id:unb64(b.id),transports:["internal"]}],userVerification:"required",timeout:60000}});return true}catch{return false}}
+
+/* ---------- الواجهة ---------- */
+function fillSelects(){
+  const o=(a,first)=>(first?`<option value="">${first}</option>`:"")+a.map(x=>`<option>${x}</option>`).join("");
+  $("#fCat").innerHTML=o(CATS,"كل التصنيفات");$("#fPlace").innerHTML=o(PLACES,"كل الأماكن");$("#pCat").innerHTML=o(CATS);$("#pPlace").innerHTML=o(PLACES);
+  $("#pDate").value=new Date().toISOString().slice(0,10);$("#pDate").max=$("#pDate").value}
+
+function show(v){
+  if(["mine","me"].includes(v)&&!state.user){authModal();return}
+  $$("section.v").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
+  $$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  if(v==="search")renderSearch();if(v==="mine")renderMine();if(v==="me")renderProfile();
+  scrollTo({top:v==="home"?0:$("main").offsetTop-70,behavior:"smooth"})}
+$$("nav button").forEach(b=>b.onclick=()=>b.dataset.v==="post"?startPost():show(b.dataset.v));
+
+function cardHTML(i){const c=CATS.find(x=>x===i.cat)||"";const em=(i.cat||"❓").split(" ")[0];
+  return `<div class="card" onclick="openItem('${i.id}')"><div class="im" style="${i.img?`background-image:url(${i.img})`:""}">${i.img?"":em}</div>
+  <span class="tag ${i.type}">${i.type==="lost"?"مفقود":"موجود"}</span>${i.status==="resolved"?'<span class="done">✔ تم التسليم</span>':""}
+  <div class="bd"><h4>${esc(i.title)}</h4><div class="m"><span>📍 ${esc(i.place)}</span><span>🕒 ${ago(i.createdAt)}</span></div></div></div>`}
+const gridFill=(el,arr,msg)=>{el.innerHTML=arr.length?arr.map(cardHTML).join(""):`<div class="empty" style="grid-column:1/-1">${msg}</div>`};
+
+async function refresh(){
+  try{state.items=await DB.list();state.users=await DB.usersCount()}catch(e){console.error(e);toast("تعذر تحميل البيانات")}
+  const act=state.items.filter(i=>i.status!=="resolved");
+  $("#s1").textContent=act.length;$("#s2").textContent=state.items.length-act.length;$("#s3").textContent=state.users;
+  gridFill($("#latest"),act.slice(0,6),"لا توجد إعلانات بعد. كن أول من ينشر! ✨");
+  if($("#v-search").classList.contains("on"))renderSearch();if($("#v-mine").classList.contains("on"))renderMine()}
+
+function renderSearch(){
+  const q=$("#q").value.trim().toLowerCase(),t=$("#fType").value,c=$("#fCat").value,p=$("#fPlace").value;
+  const r=state.items.filter(i=>(!t||i.type===t)&&(!c||i.cat===c)&&(!p||i.place===p)&&(!q||(i.title+" "+i.desc+" "+i.place).toLowerCase().includes(q)));
+  gridFill($("#results"),r,"لا توجد نتائج مطابقة 🔎");}
+["q","fType","fCat","fPlace"].forEach(id=>$("#"+id).addEventListener("input",renderSearch));
+
+function renderMine(){gridFill($("#mine"),state.items.filter(i=>i.uid===state.user?.uid),"لم تنشر أي إعلان بعد.")}
+
+function renderProfile(){const u=state.user,bio=LS.get("fi_bio");
+  $("#profile").innerHTML=`<h3>${esc(u.name)}</h3><p style="color:var(--mut)">${esc(u.email)} · ${esc(u.phone||"")}</p>
+  <div class="note">${state.fbMode?"🌐 متصل بقاعدة البيانات السحابية":"⚠️ الوضع التجريبي: البيانات محفوظة على هذا الجهاز فقط. فعّل Firebase (انظر README)."}</div>
+  <div class="row"><button class="btn sec" id="bioBtn">${bio&&bio.uid===u.uid?"🔒 قفل التطبيق الآن":"👆 تفعيل الدخول بالبصمة"}</button>
+  <button class="btn red" id="outBtn">تسجيل الخروج</button></div>`;
+  $("#bioBtn").onclick=async()=>{if(LS.get("fi_bio")?.uid===u.uid){await AUTH.logout(false);state.user=null;updateAuth();lockScreen()}else if(await bioOK()){await bioEnroll(u);renderProfile()}else toast("جهازك لا يدعم البصمة")};
+  $("#outBtn").onclick=async()=>{await AUTH.logout(true);LS.del("fi_bio");state.user=null;updateAuth();show("home");toast("تم تسجيل الخروج")}}
+
+function updateAuth(){const u=state.user,b=$("#authBtn");b.textContent=u?"👤 "+u.name.split(" ")[0]:"دخول";b.onclick=()=>u?show("me"):authModal();
+  $("#welcome").textContent=u?`أهلاً بك يا ${u.name.split(" ")[0]} 👋 يسعدنا وجودك في Find It. ابحث عن مفقوداتك أو ساعد غيرك بنشر ما وجدت.`:"أهلاً بك في منصتك الذكية للمفقودات. فقدت شيئاً؟ ابحث عنه هنا. وجدت شيئاً؟ كن سبب سعادة صاحبه. معاً نجعل كليتنا مكاناً أكثر أماناً وتعاوناً."}
+
+/* ---------- تسجيل الدخول ---------- */
+function authModal(mode="login"){
+  const bio=LS.get("fi_bio");
+  $("#authBox").innerHTML=`<div class="logo" style="justify-content:center;margin-bottom:12px"><i>🔎</i>Find It</div>
+  <div class="tabs"><button data-m="login" class="${mode==="login"?"on":""}">دخول</button><button data-m="reg" class="${mode==="reg"?"on":""}">حساب جديد</button></div>
+  <form id="af" autocomplete="on">
+  ${mode==="reg"?'<div class="field"><input id="aName" placeholder="الاسم الكامل" required autocomplete="name"></div><div class="field"><input id="aPhone" type="tel" placeholder="رقم الهاتف" required autocomplete="tel"></div>':""}
+  <div class="field"><input id="aMail" type="email" placeholder="البريد الإلكتروني" required autocomplete="email"></div>
+  <div class="field"><input id="aPass" type="password" minlength="6" placeholder="كلمة المرور (6 أحرف فأكثر)" required autocomplete="${mode==="reg"?"new-password":"current-password"}"></div>
+  <button class="btn full" type="submit">${mode==="reg"?"إنشاء الحساب":"تسجيل الدخول"}</button></form>
+  ${bio&&mode==="login"?`<button class="bio" id="bioIn">👆 الدخول بالبصمة (${esc(bio.name)})</button>`:""}
+  <button class="btn sec full sm" style="margin-top:10px" id="aClose">متابعة كزائر</button>`;
+  $("#ovAuth").classList.add("on");
+  $$("#authBox .tabs button").forEach(b=>b.onclick=()=>authModal(b.dataset.m));
+  $("#aClose").onclick=()=>$("#ovAuth").classList.remove("on");
+  if($("#bioIn"))$("#bioIn").onclick=()=>$("#ovAuth").classList.remove("on")||lockScreen();
+  $("#af").onsubmit=async e=>{e.preventDefault();const btn=e.submitter;btn.disabled=true;
+    try{const mail=$("#aMail").value.trim().toLowerCase(),pass=$("#aPass").value;sha_cache=await sha(pass);
+      state.user=mode==="reg"?await AUTH.signup($("#aName").value.trim(),mail,$("#aPhone").value.trim(),pass):await AUTH.login(mail,pass);
+      $("#ovAuth").classList.remove("on");updateAuth();toast("مرحباً "+state.user.name.split(" ")[0]+" 🎉");refresh();
+      if(!LS.get("fi_bio")&&await bioOK()&&confirm("هل تريد تفعيل الدخول بالبصمة في المرات القادمة؟"))await bioEnroll(state.user)}
+    catch(err){toast(err.code?.includes("auth/")?"بيانات الدخول غير صحيحة أو الحساب موجود":err.message)}btn.disabled=false}}
+
+function lockScreen(){
+  const b=LS.get("fi_bio");$("#authBox").innerHTML=`<div class="lock"><div class="fp">👆</div><h3>مرحباً ${esc(b.name)}</h3><p style="color:var(--mut);margin:6px 0 14px">استخدم بصمتك للدخول</p>
+  <button class="btn full" id="lk">فتح بالبصمة</button><button class="btn sec full sm" style="margin-top:10px" id="lo">استخدام كلمة المرور</button></div>`;
+  $("#ovAuth").classList.add("on");
+  const go=async()=>{if(await bioVerify()){const u=await AUTH.restore();if(u){state.user=u;$("#ovAuth").classList.remove("on");updateAuth();toast("تم الدخول ✅");refresh();return}toast("انتهت الجلسة، سجّل الدخول بكلمة المرور");authModal()}else toast("فشل التحقق")};
+  $("#lk").onclick=go;$("#lo").onclick=()=>authModal();go()}
+
+/* ---------- النشر ---------- */
+let pType="lost",pImg="";
+function startPost(t){if(!state.user){authModal();return}if(t)setType(t);show("post")}
+function setType(t){pType=t;$$(".seg button").forEach(b=>b.classList.toggle("on",b.dataset.t===t))}
+$$(".seg button").forEach(b=>b.onclick=()=>setType(b.dataset.t));setType("lost");
+$("#upBox").onclick=()=>$("#pImg").click();
+$("#pImg").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{const m=640,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);pImg=c.toDataURL("image/jpeg",.6);$("#upBox").innerHTML=`<img src="${pImg}">`};im.src=URL.createObjectURL(f)};
+$("#pSend").onclick=async()=>{
+  const title=$("#pTitle").value.trim(),phone=$("#pPhone").value.trim();
+  if(!title||!phone)return toast("أكمل الحقول المطلوبة *");
+  const it={id:uid(),type:pType,title,desc:$("#pDesc").value.trim(),cat:$("#pCat").value,place:$("#pPlace").value,date:$("#pDate").value,phone,img:pImg,uid:state.user.uid,uname:state.user.name,status:"open",createdAt:Date.now()};
+  $("#pSend").disabled=true;
+  try{await DB.add(it);toast("✅ تم نشر الإعلان");["pTitle","pDesc"].forEach(i=>$("#"+i).value="");pImg="";$("#upBox").innerHTML='📷 اضغط لالتقاط أو اختيار صورة';$("#pImg").value="";
+    await refresh();show("mine");openItem(it.id)}
+  catch(e){console.error(e);toast("فشل النشر، تحقق من الاتصال")}$("#pSend").disabled=false};
+
+/* ---------- تفاصيل الإعلان ---------- */
+function similar(it){const w=s=>new Set(s.toLowerCase().split(/\s+/).filter(x=>x.length>2));const a=w(it.title+" "+it.desc);
+  return state.items.filter(o=>o.type!==it.type&&o.status!=="resolved"&&o.cat===it.cat).map(o=>({o,s:[...w(o.title+" "+o.desc)].filter(x=>a.has(x)).length+(o.place===it.place?1:0)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,3).map(x=>x.o)}
+function openItem(id){
+  const i=state.items.find(x=>x.id===id);if(!i)return;const mine=state.user?.uid===i.uid,em=i.cat.split(" ")[0],sim=similar(i);
+  const ph=i.phone.replace(/\D/g,"").replace(/^0/,"249");
+  $("#itemBox").innerHTML=`<div class="pic" style="${i.img?`background-image:url(${i.img})`:""}">${i.img?"":em}</div>
+  <span class="tag ${i.type}" style="position:static;display:inline-block">${i.type==="lost"?"مفقود":"موجود"}</span>
+  <h3 style="margin:8px 0">${esc(i.title)}</h3><p style="color:var(--mut)">${esc(i.desc)||"لا يوجد وصف"}</p>
+  <div class="row" style="color:var(--mut);font-size:.88rem"><span>${esc(i.cat)}</span><span>📍 ${esc(i.place)}</span><span>📅 ${esc(i.date)}</span><span>👤 ${esc(i.uname)}</span></div>
+  ${i.status==="resolved"?'<div class="note" style="margin-top:12px">✔ تم تسليم هذا الغرض</div>':""}
+  ${sim.length?`<div class="match">💡 إعلانات قد تتطابق:${sim.map(s=>`<a onclick="openItem('${s.id}')">• ${esc(s.title)} (${s.type==="lost"?"مفقود":"موجود"})</a>`).join("")}</div>`:""}
+  <div class="row">
+  ${state.user?`<a class="btn sm" href="tel:${esc(i.phone)}">📞 اتصال</a><a class="btn sm gold" target="_blank" rel="noopener" href="https://wa.me/${ph}?text=${encodeURIComponent("مرحباً، بخصوص إعلانك في Find It: "+i.title)}">💬 واتساب</a>`:`<button class="btn sm" onclick="authModal()">سجّل الدخول لإظهار بيانات التواصل</button>`}
+  <button class="btn sm sec" id="shr">🔗 مشاركة</button>
+  ${mine&&i.status!=="resolved"?'<button class="btn sm sec" id="rs">✔ تم التسليم</button>':""}
+  ${mine?'<button class="btn sm red" id="dl">🗑 حذف</button>':""}
+  <button class="btn sm sec" id="cl">إغلاق</button></div>`;
+  $("#ovItem").classList.add("on");$("#cl").onclick=()=>$("#ovItem").classList.remove("on");
+  $("#shr").onclick=()=>{const t=`${i.type==="lost"?"مفقود":"موجود"}: ${i.title} — ${i.place} (Find It)`;navigator.share?navigator.share({title:"Find It",text:t,url:location.href}).catch(()=>{}):navigator.clipboard.writeText(t+" "+location.href).then(()=>toast("تم نسخ الرابط"))};
+  if($("#rs"))$("#rs").onclick=async()=>{await DB.update(i.id,{status:"resolved"});$("#ovItem").classList.remove("on");toast("🎉 رائع! تم إغلاق الإعلان");refresh()};
+  if($("#dl"))$("#dl").onclick=async()=>{if(confirm("حذف الإعلان نهائياً؟")){await DB.remove(i.id);$("#ovItem").classList.remove("on");toast("تم الحذف");refresh()}}}
+window.openItem=openItem;window.startPost=startPost;window.authModal=authModal;
+$$(".ov").forEach(o=>o.addEventListener("click",e=>{if(e.target===o&&o.id!=="ovAuth")o.classList.remove("on")}));
+
+/* ---------- ثيم + سلايدر + تشغيل ---------- */
+const root=document.documentElement;
+function theme(t){root.dataset.theme=t;$("#themeBtn").textContent=t==="dark"?"☀️":"🌙";LS.set("fi_theme",t)}
+$("#themeBtn").onclick=()=>theme(root.dataset.theme==="dark"?"light":"dark");
+theme(LS.get("fi_theme",matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"));
+let si=0;setInterval(()=>{const s=$$(".slides div");s[si].classList.remove("on");si=(si+1)%s.length;s[si].classList.add("on")},6000);
+
+(async()=>{
+  fillSelects();await initBackend();
+  const u=await AUTH.restore();
+  if(u&&LS.get("fi_bio")?.uid===u.uid){updateAuth();lockScreen()}else{state.user=u;updateAuth()}
+  await refresh();
+})();
+</script>
+</body>
+</html>
